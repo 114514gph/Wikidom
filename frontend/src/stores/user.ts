@@ -60,19 +60,16 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  // 应用启动时恢复登录态：/auth/me 仅返回 {id,username,role}，再用 /users/:username 富化资料
+  // 应用启动时恢复登录态
   async function fetchCurrentUser() {
     if (!token.value) return
     try {
-      const me = (await authApi.me()) as User
-      let profile: Partial<User> = {}
-      try {
-        const pub = await usersApi.get(me.username)
-        profile = fromPublicUser(pub)
-      } catch {
-        // 资料富化失败不影响登录态恢复
+      const me = await authApi.me()
+      if (!me) {
+        logout()
+        return
       }
-      user.value = { ...me, ...profile }
+      user.value = me as User
     } catch {
       logout()
     }

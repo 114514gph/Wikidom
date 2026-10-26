@@ -15,8 +15,9 @@ export const authApi = {
     return apiClient.post('/auth/register', { username, email, password })
   },
 
-  async me(): Promise<User> {
-    return apiClient.get('/auth/me')
+  async me(): Promise<User | null> {
+    const res = await apiClient.get('/auth/me')
+    return res.user
   },
 
   async logout(): Promise<void> {
