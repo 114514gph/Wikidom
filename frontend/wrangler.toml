@@ -1,0 +1,17 @@
+name = "wikidom"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "./dist"
+
+# D1 数据库
+[[d1_databases]]
+binding = "DB"
+database_name = "wikidom"
+database_id = "abe6fc1f-4c1f-45f0-ba01-04bbf37d8396"
+
+# KV 命名空间
+[[kv_namespaces]]
+binding = "KV"
+id = "fc6536d6c66941308515179464665024"
+
+[vars]
+SITE_NAME = "Wikidom"
